@@ -7,7 +7,14 @@ import {
 import colors from "../config/colors";
 import AppText from "./AppText";
 
-const Card = ({ title, subtitle, imageUrl, onPress }) => {
+interface Props {
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+  onPress: () => void;
+}
+
+const Card = ({ title, subtitle, imageUrl, onPress }: Props) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.card}>

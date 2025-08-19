@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  style: object;
+  style?: object;
 }
 
 const Screen = ({ children, style }: Props) => {

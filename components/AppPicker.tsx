@@ -1,17 +1,30 @@
+import { Item } from "@/types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useState } from "react";
 import {
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  Modal,
   Button,
+  DimensionValue,
   FlatList,
+  Modal,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import defaultStyles from "../config/styles";
 import AppText from "./AppText";
-import { useState } from "react";
-import Screen from "./Screen";
 import PickerItem from "./PickerItem";
+import Screen from "./Screen";
+
+interface Props {
+  icon: any;
+  items: Item[];
+  placeholder: string;
+  selectedItem: Item;
+  onSelectItem: (item: Item) => void;
+  numberOfColumns?: number;
+  width?: DimensionValue;
+  PickerItemComponent?: any;
+}
 
 const AppPicker = ({
   icon,
@@ -22,7 +35,7 @@ const AppPicker = ({
   numberOfColumns = 1,
   PickerItemComponent = PickerItem,
   width = "100%",
-}) => {
+}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (

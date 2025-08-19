@@ -10,7 +10,12 @@ import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
-const ImageInput = ({ imageUri, onChangeImage }) => {
+interface Props {
+  imageUri?: string;
+  onChangeImage: (uri: string | null) => void;
+}
+
+const ImageInput = ({ imageUri, onChangeImage }: Props) => {
   //request permission
   const requestPermission = async () => {
     const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();

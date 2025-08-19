@@ -3,7 +3,7 @@ import React from "react";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const ListItemDeleteAction = ({ onPress }) => {
+const ListItemDeleteAction = ({ onPress }: { onPress: () => void }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
