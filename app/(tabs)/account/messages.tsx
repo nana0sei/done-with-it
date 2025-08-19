@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const AccountPage = () => {
+const MessagesPage = () => {
   return (
     <View>
-      <Text>account</Text>
+      <Text>i am messages</Text>
     </View>
   );
 };
 
-export default AccountPage;
+export default MessagesPage;
 
 const styles = StyleSheet.create({});
