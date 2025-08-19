@@ -6,15 +6,17 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const NewListingButton = ({ onPress }: { onPress: () => void }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
-        <MaterialCommunityIcons
-          name="plus-circle"
-          color={colors.white}
-          size={40}
-        />
-      </View>
-    </TouchableOpacity>
+    <View style={styles.buttonWrapper}>
+      <TouchableOpacity onPress={onPress}>
+        <View style={styles.container}>
+          <MaterialCommunityIcons
+            name="plus-circle"
+            color={colors.white}
+            size={40}
+          />
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -27,9 +29,11 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
     borderRadius: 40,
     borderWidth: 10,
-    bottom: 30,
+    bottom: 25,
     height: 80,
     justifyContent: "center",
     width: 80,
   },
+
+  buttonWrapper: { flex: 1, alignItems: "center", justifyContent: "center" },
 });

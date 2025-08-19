@@ -1,9 +1,10 @@
 import NewListingButton from "@/components/NewListingButton";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import React from "react";
 
 const AppLayout = () => {
+  const router = useRouter();
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
@@ -16,17 +17,10 @@ const AppLayout = () => {
       />
       <Tabs.Screen
         name="new-listing"
-        options={({ navigation }) => ({
+        options={() => ({
           tabBarButton: () => (
             <NewListingButton
-              onPress={() => navigation.navigate("Listing Edit")}
-            />
-          ),
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons
-              name="plus-circle"
-              color={color}
-              size={size}
+              onPress={() => router.navigate("/(tabs)/new-listing")}
             />
           ),
         })}
