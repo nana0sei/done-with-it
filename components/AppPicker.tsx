@@ -1,4 +1,4 @@
-import { Item } from "@/types";
+import { Item, MaterialCommunityIconName } from "@/types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import {
@@ -16,7 +16,7 @@ import PickerItem from "./PickerItem";
 import Screen from "./Screen";
 
 interface Props {
-  icon?: any;
+  icon?: MaterialCommunityIconName;
   items: Item[];
   placeholder: string;
   selectedItem: Item;

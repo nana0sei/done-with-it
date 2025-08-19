@@ -1,13 +1,24 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { DimensionValue, StyleSheet, TextInput, View } from "react-native";
+import {
+  DimensionValue,
+  StyleSheet,
+  TextInput,
+  View,
+  TextInputProps,
+} from "react-native";
 import defaultStyles from "../config/styles";
+import { MaterialCommunityIconName } from "@/types";
 
-interface Props {
-  icon?: any;
+export interface AppTextInputProps extends TextInputProps {
+  icon?: MaterialCommunityIconName;
   width?: DimensionValue;
 }
 
-const AppTextInput = ({ icon, width = "100%", ...otherProps }: Props) => {
+const AppTextInput = ({
+  icon,
+  width = "100%",
+  ...otherProps
+}: AppTextInputProps) => {
   return (
     <View style={[styles.container, { width }]}>
       {icon && (
