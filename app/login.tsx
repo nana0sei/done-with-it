@@ -4,9 +4,10 @@ import AppForm from "../components/Forms/AppForm";
 import AppFormField from "../components/Forms/AppFormField";
 import Screen from "../components/Screen";
 import SubmitButton from "../components/Forms/SubmitButton";
+import z from "zod";
 
 const LoginScreen = () => {
-  const initialValues = {
+  const initialValues: UserData = {
     email: "",
     password: "",
   };
@@ -22,7 +23,10 @@ const LoginScreen = () => {
         source={require("../assets/images/store.png")}
       />
 
-      <AppForm defaultValues={initialValues}>
+      <AppForm
+        defaultValues={initialValues}
+        validationSchema={validationSchema}
+      >
         <AppFormField
           name="email"
           autoCapitalize="none"
@@ -63,3 +67,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+const validationSchema = z.object({
+  email: z.email(),
+  password: z.string("Password is required"),
+});
+
+type UserData = z.infer<typeof validationSchema>;
