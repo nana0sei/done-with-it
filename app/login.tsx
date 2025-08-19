@@ -22,7 +22,7 @@ const LoginScreen = () => {
         source={require("../assets/images/store.png")}
       />
 
-      <AppForm onSubmit={handleLogin} defaultValues={initialValues}>
+      <AppForm defaultValues={initialValues}>
         <AppFormField
           name="email"
           autoCapitalize="none"
