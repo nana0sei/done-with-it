@@ -3,7 +3,7 @@ import { DimensionValue, StyleSheet, TextInput, View } from "react-native";
 import defaultStyles from "../config/styles";
 
 interface Props {
-  icon: any;
+  icon?: any;
   width?: DimensionValue;
 }
 

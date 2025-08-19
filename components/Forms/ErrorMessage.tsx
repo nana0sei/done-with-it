@@ -1,16 +1,15 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { StyleSheet } from "react-native";
 import AppText from "../AppText";
 
 interface Props {
-  error?: string;
-  visible?: boolean;
+  children?: ReactNode;
 }
 
-const ErrorMessage = ({ error, visible = false }: Props) => {
-  if (!error || !visible) return null;
+const ErrorMessage = ({ children }: Props) => {
+  if (!children) return null;
 
-  return <AppText style={styles.error}>{error}</AppText>;
+  return <AppText style={styles.error}>{children}</AppText>;
 };
 
 export default ErrorMessage;

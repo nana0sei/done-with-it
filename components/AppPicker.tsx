@@ -16,7 +16,7 @@ import PickerItem from "./PickerItem";
 import Screen from "./Screen";
 
 interface Props {
-  icon: any;
+  icon?: any;
   items: Item[];
   placeholder: string;
   selectedItem: Item;
