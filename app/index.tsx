@@ -22,7 +22,7 @@ const WelcomeScreen = () => {
         <AppButton
           title="Register"
           color="secondary"
-          onPress={() => router.navigate("/login")}
+          onPress={() => router.navigate("/register")}
         />
       </View>
     </ImageBackground>

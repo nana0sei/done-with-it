@@ -1,32 +1,37 @@
 import React from "react";
-import { Image, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import AppForm from "../components/Forms/AppForm";
 import AppFormField from "../components/Forms/AppFormField";
 import Screen from "../components/Screen";
 import SubmitButton from "../components/Forms/SubmitButton";
 import z from "zod";
 
-const LoginScreen = () => {
-  const initialValues: UserData = {
+const RegisterScreen = () => {
+  const defaultValues = {
+    name: "",
     email: "",
     password: "",
   };
 
-  const handleLogin = (values: UserData) => {
+  const handleSignUp = (values: RegisterData) => {
     console.log("Form values:", values);
   };
 
   return (
     <Screen style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require("../assets/images/store.png")}
-      />
-
       <AppForm
-        defaultValues={initialValues}
+        defaultValues={defaultValues}
         validationSchema={validationSchema}
       >
+        <AppFormField
+          name="name"
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="account"
+          placeholder="Name"
+          textContentType="name"
+        />
+
         <AppFormField
           name="email"
           autoCapitalize="none"
@@ -47,30 +52,26 @@ const LoginScreen = () => {
           secureTextEntry
         />
 
-        <SubmitButton title="login" onSubmit={handleLogin} />
+        <SubmitButton title="Sign Up" onSubmit={handleSignUp} />
       </AppForm>
     </Screen>
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
 
 const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
-  logo: {
-    width: 80,
-    height: 80,
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
-  },
 });
 
 const validationSchema = z.object({
-  email: z.email(),
-  password: z.string("Password is required"),
+  name: z.string().min(3, "Name must be at least three characters long"),
+  email: z.email("Please enter a valid email"),
+  password: z
+    .string()
+    .min(3, "Password must be at least three characters long"),
 });
 
-type UserData = z.infer<typeof validationSchema>;
+type RegisterData = z.infer<typeof validationSchema>;
