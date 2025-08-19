@@ -5,15 +5,14 @@ import AppFormField from "../components/Forms/AppFormField";
 import Screen from "../components/Screen";
 import SubmitButton from "../components/Forms/SubmitButton";
 
-// const validationSchema = Yup.object({
-//   email: Yup.string().email().required().label("Email"),
-//   password: Yup.string().required().min(4).label("Password"),
-// });
-
 const LoginScreen = () => {
   const initialValues = {
     email: "",
     password: "",
+  };
+
+  const handleLogin = (values: any) => {
+    console.log("Form values:", values);
   };
 
   return (
@@ -23,7 +22,7 @@ const LoginScreen = () => {
         source={require("../assets/images/store.png")}
       />
 
-      <AppForm onSubmit={() => console.log(initialValues)}>
+      <AppForm onSubmit={handleLogin} defaultValues={initialValues}>
         <AppFormField
           name="email"
           autoCapitalize="none"
@@ -44,10 +43,7 @@ const LoginScreen = () => {
           secureTextEntry
         />
 
-        <SubmitButton
-          title="login"
-          onSubmit={() => console.log(initialValues)}
-        />
+        <SubmitButton title="login" onSubmit={handleLogin} />
       </AppForm>
     </Screen>
   );
