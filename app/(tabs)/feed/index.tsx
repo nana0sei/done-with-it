@@ -30,7 +30,12 @@ const HomePage = () => {
             title={item.title}
             subtitle={`$ ${item.price}`}
             imageUrl={item.images[0].fileName}
-            onPress={() => router.push(`/feed/${item.id}` as any)}
+            onPress={() =>
+              router.push({
+                pathname: `/(tabs)/feed/[id]`,
+                params: item as any,
+              })
+            }
           />
         )}
       />
