@@ -19,25 +19,23 @@ const AppFormField = ({ name, width, icon, ...otherProps }: Props) => {
   } = useFormContext();
   return (
     <>
-      <>
-        <Controller
-          control={control}
-          name={name}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <AppTextInput
-              icon={icon}
-              width={width}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              {...otherProps}
-            />
-          )}
-        />
-        {errors[name] && (
-          <ErrorMessage>{errors[name]?.message as string}</ErrorMessage>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <AppTextInput
+            icon={icon}
+            width={width}
+            value={value}
+            onChangeText={onChange}
+            onBlur={onBlur}
+            {...otherProps}
+          />
         )}
-      </>
+      />
+      {errors[name] && (
+        <ErrorMessage>{errors[name]?.message as string}</ErrorMessage>
+      )}
     </>
   );
 };

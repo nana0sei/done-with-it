@@ -14,13 +14,13 @@ const NewListingPage = () => {
   const location = useLocation();
   const defaultValues: ListingData = {
     title: "",
-    price: 0,
+    price: "",
     category: null,
     description: "",
     images: [],
   };
 
-  const handleLogin = (values: ListingData) => {
+  const handleSubmit = (values: ListingData) => {
     console.log("location", location);
     console.log("Form values:", values);
   };
@@ -61,7 +61,7 @@ const NewListingPage = () => {
           placeholder="Description"
         />
 
-        <SubmitButton title="Post" onSubmit={handleLogin} />
+        <SubmitButton title="Post" onSubmit={handleSubmit} />
       </AppForm>
     </Screen>
   );
@@ -81,7 +81,7 @@ const validationSchema = z.object({
     .min(1, "Name must be at least three characters long")
     .max(225, "Maximum character limit exceeded"),
   price: z
-    .number()
+    .string()
     .min(1, "Invalid price")
     .max(225, "Maximum price limit exceeded"),
   category: z.object().nullable(),
