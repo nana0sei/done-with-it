@@ -16,7 +16,7 @@ const LoginScreen = () => {
 
   const handleLogin = (values: UserData) => {
     console.log("Form values:", values);
-    router.navigate("/(tabs)/home");
+    router.navigate("/(tabs)/feed");
   };
 
   return (

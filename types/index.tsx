@@ -7,5 +7,18 @@ export interface Item {
   icon: any;
 }
 
+export interface Listing {
+  id: number;
+  title: string;
+  images: { fileName: string }[];
+  categoryId: number;
+  price: number;
+  userId: number;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+}
+
 export type MaterialCommunityIconName =
   keyof typeof MaterialCommunityIconsGlyphs;
