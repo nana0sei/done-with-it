@@ -7,10 +7,8 @@ import { Stack } from "expo-router";
 export default function RootLayout() {
   return (
     <ThemeProvider value={lightTheme}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="+not-found" />
-      </Stack>
+      <Stack screenOptions={{ headerShown: false }} />
+
       <StatusBar style="auto" />
     </ThemeProvider>
   );
