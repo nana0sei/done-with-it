@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import Screen from "@/components/Screen";
 import colors from "@/config/colors";
+import React from "react";
+import { StyleSheet, Text } from "react-native";
 
 const MessagesPage = () => {
   return (
