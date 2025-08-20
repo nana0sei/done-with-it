@@ -1,14 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { StyleSheet, Text } from "react-native";
+import Screen from "@/components/Screen";
+import colors from "@/config/colors";
 
-const index = () => {
+const HomePage = () => {
   return (
-    <View>
+    <Screen style={styles.screen}>
       <Text>Hello I am index</Text>
-    </View>
+    </Screen>
   );
 };
 
-export default index;
+export default HomePage;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    paddingHorizontal: 20,
+    backgroundColor: colors.light,
+  },
+});
