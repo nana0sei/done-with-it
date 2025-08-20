@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { DimensionValue, StyleSheet } from "react-native";
 import AppPicker from "../AppPicker";
 import ErrorMessage from "./ErrorMessage";
@@ -28,18 +28,26 @@ const AppFormPicker = ({
     formState: { errors },
     setValue,
     getValues,
+    control,
   } = useFormContext();
   return (
     <>
-      <AppPicker
-        items={items}
-        numberOfColumns={numberOfColumns}
-        onSelectItem={(item) => setValue(name, item)}
-        placeholder={placeholder}
-        selectedItem={getValues(name)}
-        PickerItemComponent={PickerItemComponent}
-        width={width}
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, value } }) => (
+          <AppPicker
+            items={items}
+            numberOfColumns={numberOfColumns}
+            onSelectItem={onChange}
+            placeholder={placeholder}
+            selectedItem={value}
+            PickerItemComponent={PickerItemComponent}
+            width={width}
+          />
+        )}
       />
+
       {errors[name] && (
         <ErrorMessage>{errors[name]?.message as string}</ErrorMessage>
       )}

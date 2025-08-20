@@ -17,5 +17,7 @@ const styles = StyleSheet.create({
   screen: {
     paddingHorizontal: 20,
     backgroundColor: colors.light,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
