@@ -10,10 +10,7 @@ const ListingDetailsScreen = () => {
   const listing = useLocalSearchParams<Listing>();
   return (
     <View>
-      <Image
-        source={{ uri: listing.images[0].fileName }}
-        style={styles.image}
-      />
+      <Image source={{ uri: listing.images[0].url }} style={styles.image} />
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>{listing.title}</AppText>
         <AppText style={styles.price}>${listing.price}</AppText>

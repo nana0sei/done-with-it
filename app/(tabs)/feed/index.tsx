@@ -29,7 +29,7 @@ const HomePage = () => {
           <Card
             title={item.title}
             subtitle={`$ ${item.price}`}
-            imageUrl={item.images[0].fileName}
+            imageUrl={item.images[0].url}
             onPress={() =>
               router.push({
                 pathname: `/(tabs)/feed/[id]`,

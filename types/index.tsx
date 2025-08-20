@@ -10,7 +10,10 @@ export interface Item {
 export interface Listing {
   id: number;
   title: string;
-  images: { fileName: string }[];
+  images: {
+    url: string;
+    thumbnailUrl: string;
+  }[];
   categoryId: number;
   price: number;
   userId: number;
