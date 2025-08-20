@@ -50,7 +50,7 @@ const LoginScreen = () => {
           secureTextEntry
         />
 
-        <SubmitButton title="login" onSubmit={handleLogin} />
+        <SubmitButton title="Login" onSubmit={handleLogin} />
       </AppForm>
     </Screen>
   );
