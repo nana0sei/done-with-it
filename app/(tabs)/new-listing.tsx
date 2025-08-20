@@ -86,9 +86,7 @@ const validationSchema = z.object({
     .max(225, "Maximum price limit exceeded"),
   category: z.object().nullable(),
   description: z.string().optional(),
-  images: z
-    .array(z.object({ uri: z.string() }))
-    .min(1, "Please select at least one image"),
+  images: z.array(z.string()).min(1, "Please select at least one image"),
 });
 
 type ListingData = z.infer<typeof validationSchema>;
