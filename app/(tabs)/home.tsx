@@ -6,7 +6,7 @@ import colors from "@/config/colors";
 const HomePage = () => {
   return (
     <Screen style={styles.screen}>
-      <Text>Hello I am index</Text>
+      <Text>Hello I am home</Text>
     </Screen>
   );
 };

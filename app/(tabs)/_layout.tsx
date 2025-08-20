@@ -8,7 +8,7 @@ const AppLayout = () => {
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />

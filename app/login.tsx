@@ -5,8 +5,10 @@ import AppFormField from "../components/Forms/AppFormField";
 import Screen from "../components/Screen";
 import SubmitButton from "../components/Forms/SubmitButton";
 import z from "zod";
+import { useRouter } from "expo-router";
 
 const LoginScreen = () => {
+  const router = useRouter();
   const initialValues: UserData = {
     email: "",
     password: "",
@@ -14,6 +16,7 @@ const LoginScreen = () => {
 
   const handleLogin = (values: UserData) => {
     console.log("Form values:", values);
+    router.navigate("/(tabs)/home");
   };
 
   return (
@@ -69,8 +72,8 @@ const styles = StyleSheet.create({
 });
 
 const validationSchema = z.object({
-  email: z.email(),
-  password: z.string("Password is required"),
+  email: z.email("Please enter a valid email"),
+  password: z.string().min(1, "Password is required"),
 });
 
 type UserData = z.infer<typeof validationSchema>;
