@@ -13,6 +13,7 @@ const AppLayout = () => {
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
+          title: "Home",
         }}
       />
       <Tabs.Screen
@@ -23,6 +24,7 @@ const AppLayout = () => {
               onPress={() => router.navigate("/(tabs)/new-listing")}
             />
           ),
+          title: "New Listing",
         })}
       />
       <Tabs.Screen
@@ -31,6 +33,7 @@ const AppLayout = () => {
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
+          title: "Account",
         }}
       />
     </Tabs>
