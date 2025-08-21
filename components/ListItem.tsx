@@ -16,7 +16,7 @@ import colors from "../config/colors";
 import AppText from "./AppText";
 
 interface Props {
-  image?: ImageSourcePropType;
+  image?: ImageSourcePropType | { uri: string };
   title: string;
   subtitle?: string;
   onPress?: () => void;

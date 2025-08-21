@@ -1,10 +1,10 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
 import AppText from "@/components/AppText";
 import ListItem from "@/components/ListItem";
 import colors from "@/config/colors";
-import { useLocalSearchParams } from "expo-router";
 import { Listing } from "@/types";
+import { useLocalSearchParams } from "expo-router";
+import React from "react";
+import { Image, StyleSheet, View } from "react-native";
 
 const ListingDetailsScreen = () => {
   const params = useLocalSearchParams();
