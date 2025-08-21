@@ -32,7 +32,7 @@ const HomePage = () => {
             imageUrl={item.images[0].url}
             onPress={() =>
               router.push({
-                pathname: `/(tabs)/feed/[id]`,
+                pathname: `/(tabs)/feed/[listing]`,
                 params: { listing: JSON.stringify(item) },
               })
             }
