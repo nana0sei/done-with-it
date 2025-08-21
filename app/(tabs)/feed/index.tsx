@@ -33,7 +33,7 @@ const HomePage = () => {
             onPress={() =>
               router.push({
                 pathname: `/(tabs)/feed/[id]`,
-                params: item as any,
+                params: { listing: JSON.stringify(item) },
               })
             }
           />

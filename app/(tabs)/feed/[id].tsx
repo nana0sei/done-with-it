@@ -7,7 +7,8 @@ import { useLocalSearchParams } from "expo-router";
 import { Listing } from "@/types";
 
 const ListingDetailsScreen = () => {
-  const listing = useLocalSearchParams() as unknown as Listing;
+  const params = useLocalSearchParams();
+  const listing = JSON.parse(params.listing as string) as Listing;
   return (
     <View>
       <Image source={{ uri: listing.images[0].url }} style={styles.image} />
