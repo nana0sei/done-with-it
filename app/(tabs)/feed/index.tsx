@@ -6,6 +6,8 @@ import { FlatList, StyleSheet } from "react-native";
 import listingsApi from "@/api/listings";
 import { Listing } from "@/types";
 import { useRouter } from "expo-router";
+import AppText from "@/components/AppText";
+import AppButton from "@/components/AppButton";
 
 const HomePage = () => {
   const [listings, setListings] = useState<Listing[] | undefined>([]);
@@ -19,14 +21,19 @@ const HomePage = () => {
 
   const loadListings = async () => {
     const response = await listingsApi.getListings();
-    if (!response.ok) setError(true);
-    else {
-      setListings(response.data);
-      setError(false);
-    }
+    if (!response.ok) return setError(true);
+
+    setListings(response.data);
+    setError(false);
   };
   return (
     <Screen style={styles.screen}>
+      {error && (
+        <>
+          <AppText> Couldn't retrieve the listings</AppText>
+          <AppButton title="Retry" onPress={loadListings} />
+        </>
+      )}
       <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
