@@ -8,7 +8,8 @@ import { Listing } from "@/types";
 import { useRouter } from "expo-router";
 
 const HomePage = () => {
-  const [listings, setListings] = useState<Listing[]>([]);
+  const [listings, setListings] = useState<Listing[] | undefined>([]);
+  const [error, setError] = useState(false);
 
   const router = useRouter();
 
@@ -17,8 +18,12 @@ const HomePage = () => {
   }, []);
 
   const loadListings = async () => {
-    const response = (await listingsApi.getListings()) as unknown as Listing[];
-    setListings(response);
+    const response = await listingsApi.getListings();
+    if (!response.ok) setError(true);
+    else {
+      setListings(response.data);
+      setError(false);
+    }
   };
   return (
     <Screen style={styles.screen}>
