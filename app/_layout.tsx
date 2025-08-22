@@ -1,4 +1,4 @@
-import { darkTheme, lightTheme } from "@/config/navigationTheme";
+import { lightTheme } from "@/config/navigationTheme";
 import { ThemeProvider } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
