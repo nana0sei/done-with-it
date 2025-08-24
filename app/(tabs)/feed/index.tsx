@@ -1,3 +1,4 @@
+import ActivityIndicator from "@/components/ActivityIndicator";
 import AppButton from "@/components/AppButton";
 import AppText from "@/components/AppText";
 import Card from "@/components/Card";
@@ -15,9 +16,10 @@ const HomePage = () => {
   if (isLoading)
     return (
       <Screen style={styles.screen}>
-        <AppText>Loading...</AppText>
+        <ActivityIndicator visible={true} />
       </Screen>
     );
+
   return (
     <Screen style={styles.screen}>
       {error && (
