@@ -21,7 +21,7 @@ const HomePage = () => {
 
   const loadListings = async () => {
     const response = await listingsApi.getListings();
-    if (!response.ok) return setError(true);
+    if (!response.ok) setError(true);
 
     setListings(response.data);
     setError(false);
