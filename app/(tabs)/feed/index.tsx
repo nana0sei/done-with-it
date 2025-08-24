@@ -1,37 +1,29 @@
+import AppButton from "@/components/AppButton";
+import AppText from "@/components/AppText";
 import Card from "@/components/Card";
 import Screen from "@/components/Screen";
 import colors from "@/config/colors";
-import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
-import listingsApi from "@/api/listings";
-import { Listing } from "@/types";
+import useListings from "@/hooks/useListings";
 import { useRouter } from "expo-router";
-import AppText from "@/components/AppText";
-import AppButton from "@/components/AppButton";
+import React from "react";
+import { FlatList, StyleSheet } from "react-native";
 
 const HomePage = () => {
-  const [listings, setListings] = useState<Listing[] | undefined>([]);
-  const [error, setError] = useState(false);
-
+  const { data: listings, isLoading, error, refetch } = useListings();
   const router = useRouter();
 
-  useEffect(() => {
-    loadListings();
-  }, []);
-
-  const loadListings = async () => {
-    const response = await listingsApi.getListings();
-    if (!response.ok) setError(true);
-
-    setListings(response.data);
-    setError(false);
-  };
+  if (isLoading)
+    return (
+      <Screen style={styles.screen}>
+        <AppText>Loading...</AppText>
+      </Screen>
+    );
   return (
     <Screen style={styles.screen}>
       {error && (
         <>
           <AppText> Couldn't retrieve the listings</AppText>
-          <AppButton title="Retry" onPress={loadListings} />
+          <AppButton title="Retry" onPress={refetch} />
         </>
       )}
       <FlatList
