@@ -4,6 +4,7 @@ import AppText from "@/components/AppText";
 import Card from "@/components/Card";
 import Screen from "@/components/Screen";
 import colors from "@/config/colors";
+import useRefreshOnFocus from "@/config/refetchOnFocus";
 import useListings from "@/hooks/useListings";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -12,6 +13,8 @@ import { FlatList, StyleSheet } from "react-native";
 const HomePage = () => {
   const { data: listings, isLoading, error, refetch } = useListings();
   const router = useRouter();
+
+  useRefreshOnFocus(refetch);
 
   if (isLoading)
     return (

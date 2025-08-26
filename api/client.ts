@@ -20,7 +20,7 @@ class APIClient<T> {
   create = async (data: T, path: string = "") => {
     return apiInstance
       .post<T>(`${this.endpoint}${path}`, data)
-      .then((res) => res.data);
+      .then((res) => res);
   };
 
   createMultiPart = async (data: FormData, path: string = "") => {

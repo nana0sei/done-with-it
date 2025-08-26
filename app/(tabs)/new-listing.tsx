@@ -11,7 +11,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import z from "zod";
 
-const api = new APIClient<any>("/listings");
+const api = new APIClient<FormData>("/listings");
 
 const NewListingPage = () => {
   const location = useLocation();
@@ -45,8 +45,10 @@ const NewListingPage = () => {
 
     const res = await api.createMultiPart(data);
 
-    if (res.ok) alert("Success");
-    else alert("Something went wrong");
+    if (!res.ok) {
+      alert("Something went wrong");
+      console.error(res.problem);
+    } else alert("Success");
   };
 
   return (
