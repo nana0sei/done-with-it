@@ -29,13 +29,13 @@ const NewListingPage = () => {
     data.append("price", values.price);
     data.append(
       "categoryId",
-      values.category ? (values.category.value as any) : "0"
+      values.category ? values.category.value.toString() : "0"
     );
     data.append("description", values.description ? values.description : "");
 
     values.images.forEach((image, index) =>
       data.append("images", {
-        name: `image${index}`,
+        name: `image${index}.jpg`,
         type: "image/jpeg",
         uri: image,
       } as any)
