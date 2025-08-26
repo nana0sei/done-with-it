@@ -35,7 +35,7 @@ const NewListingPage = () => {
 
     values.images.forEach((image, index) =>
       data.append("images", {
-        name: `image${index}.jpg`,
+        name: `image${index}`,
         type: "image/jpeg",
         uri: image,
       } as any)
@@ -43,7 +43,9 @@ const NewListingPage = () => {
 
     if (location) data.append("location", JSON.stringify(location));
 
-    const res = await api.createMultiPart(data);
+    console.log(data instanceof FormData);
+
+    const res = await api.create(data);
 
     if (!res.ok) {
       alert("Something went wrong");
