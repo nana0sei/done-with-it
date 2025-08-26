@@ -1,3 +1,4 @@
+import APIClient from "@/api/client";
 import CategoryPickerItem from "@/components/CategoryPickerItem";
 import AppForm from "@/components/Forms/AppForm";
 import AppFormField from "@/components/Forms/AppFormField";
@@ -10,6 +11,8 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import z from "zod";
 
+const api = new APIClient<any>("/listings");
+
 const NewListingPage = () => {
   const location = useLocation();
   const defaultValues: ListingData = {
@@ -20,9 +23,30 @@ const NewListingPage = () => {
     images: [],
   };
 
-  const handleSubmit = (values: ListingData) => {
-    console.log("location", location);
-    console.log("Form values:", values);
+  const handleSubmit = async (values: ListingData) => {
+    const data = new FormData();
+    data.append("title", values.title);
+    data.append("price", values.price);
+    data.append(
+      "categoryId",
+      values.category ? (values.category.value as any) : "0"
+    );
+    data.append("description", values.description ? values.description : "");
+
+    values.images.forEach((image, index) =>
+      data.append("images", {
+        name: `image${index}`,
+        type: "image/jpeg",
+        uri: image,
+      } as any)
+    );
+
+    if (location) data.append("location", JSON.stringify(location));
+
+    const res = await api.createMultiPart(data);
+
+    if (res.ok) alert("Success");
+    else alert("Something went wrong");
   };
 
   return (
@@ -84,7 +108,14 @@ const validationSchema = z.object({
     .string()
     .min(1, "Invalid price")
     .max(225, "Maximum price limit exceeded"),
-  category: z.object().nullable(),
+  category: z
+    .object({
+      label: z.string(),
+      value: z.number(),
+      backgroundColor: z.string(),
+      icon: z.string(),
+    })
+    .nullable(),
   description: z.string().optional(),
   images: z.array(z.string()).min(1, "Please select at least one image"),
 });

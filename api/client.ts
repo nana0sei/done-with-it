@@ -19,11 +19,7 @@ class APIClient<T> {
 
   create = async (data: T, path: string = "") => {
     return apiInstance
-      .post<T>(`${this.endpoint}${path}`, data, {
-        headers: {
-          "Content-Type": "",
-        },
-      })
+      .post<T>(`${this.endpoint}${path}`, data)
       .then((res) => res.data);
   };
 
@@ -34,7 +30,7 @@ class APIClient<T> {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((res) => res.data);
+      .then((res) => res);
   };
 }
 

@@ -22,12 +22,8 @@ const AppFormPicker = ({
   placeholder,
   width,
 }: Props) => {
-  // const { errors, setFieldValue, touched, values } = useFormikContext();
-
   const {
     formState: { errors },
-    setValue,
-    getValues,
     control,
   } = useFormContext();
   return (
