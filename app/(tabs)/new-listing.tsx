@@ -43,8 +43,6 @@ const NewListingPage = () => {
 
     if (location) data.append("location", JSON.stringify(location));
 
-    console.log(data instanceof FormData);
-
     const res = await api.create(data);
 
     if (!res.ok) {
