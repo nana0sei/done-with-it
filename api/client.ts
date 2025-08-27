@@ -29,6 +29,8 @@ class APIClient<T> {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        onUploadProgress: (progress) =>
+          console.log(progress.loaded / progress.total!),
       })
       .then((res) => res);
   };
