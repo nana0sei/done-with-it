@@ -22,6 +22,16 @@ class APIClient<T> {
       .post<T>(`${this.endpoint}${path}`, data)
       .then((res) => res);
   };
+
+  createMultiPart = async (data: FormData, path: string = "") => {
+    return apiInstance
+      .post<FormData>(`${this.endpoint}${path}`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => res);
+  };
 }
 
 export default APIClient;
