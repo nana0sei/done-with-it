@@ -41,8 +41,6 @@ const NewListingPage = () => {
       } as any)
     );
 
-    console.log("location", location);
-
     if (location) data.append("location", JSON.stringify(location));
 
     const res = await api.createMultiPart(data);
