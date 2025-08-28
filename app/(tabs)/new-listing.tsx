@@ -36,7 +36,7 @@ const NewListingPage = () => {
     values.images.forEach((image, index) =>
       data.append("images", {
         name: `image${index}`,
-        type: "image/jpeg",
+        type: "image/png",
         uri: image,
       } as any)
     );
