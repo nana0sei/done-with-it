@@ -1,4 +1,5 @@
 import { create } from "apisauce";
+import type { AxiosProgressEvent } from "axios";
 
 const apiInstance = create({
   baseURL: "http://192.168.0.102:9000/api",
@@ -23,14 +24,18 @@ class APIClient<T> {
       .then((res) => res);
   };
 
-  createMultiPart = async (data: FormData, path: string = "") => {
+  createMultiPart = async (
+    data: FormData,
+    onUploadProgress: (progress: number) => void,
+    path: string = ""
+  ) => {
     return apiInstance
       .post<FormData>(`${this.endpoint}${path}`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
         onUploadProgress: (progress) =>
-          console.log(progress.loaded / progress.total!),
+          onUploadProgress(progress.loaded / (progress.total ?? 1)),
       })
       .then((res) => res);
   };
