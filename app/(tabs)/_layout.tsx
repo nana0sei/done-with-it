@@ -5,6 +5,7 @@ import React from "react";
 
 const AppLayout = () => {
   const router = useRouter();
+
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
