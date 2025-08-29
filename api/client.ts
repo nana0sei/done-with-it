@@ -1,8 +1,7 @@
 import { create } from "apisauce";
-import type { AxiosProgressEvent } from "axios";
 
 const apiInstance = create({
-  baseURL: "http://192.168.0.102:9000/api",
+  baseURL: "http://192.168.0.104:9000/api",
 });
 
 class APIClient<T> {

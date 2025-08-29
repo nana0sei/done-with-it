@@ -6,8 +6,9 @@ import AppFormPicker from "@/components/Forms/AppFormPicker";
 import FormImagePicker from "@/components/Forms/FormImagePicker";
 import SubmitButton from "@/components/Forms/SubmitButton";
 import Screen from "@/components/Screen";
+import UploadScreen from "@/components/UploadScreen";
 import useLocation from "@/hooks/useLocation";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import z from "zod";
 
@@ -15,6 +16,9 @@ const api = new APIClient<FormData>("/listings");
 
 const NewListingPage = () => {
   const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+
   const defaultValues: ListingData = {
     title: "",
     price: "",
@@ -24,6 +28,8 @@ const NewListingPage = () => {
   };
 
   const handleSubmit = async (values: ListingData) => {
+    setUploadVisible(true);
+
     const data = new FormData();
     data.append("title", values.title);
     data.append("price", values.price);
@@ -44,8 +50,10 @@ const NewListingPage = () => {
     if (location) data.append("location", JSON.stringify(location));
 
     const res = await api.createMultiPart(data, (progress) =>
-      console.log(progress)
+      setProgress(progress)
     );
+
+    setUploadVisible(false);
 
     if (!res.ok) {
       alert("Something went wrong");
@@ -55,6 +63,7 @@ const NewListingPage = () => {
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen progress={progress} visible={uploadVisible} />
       <AppForm
         defaultValues={defaultValues}
         validationSchema={validationSchema}
