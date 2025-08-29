@@ -28,6 +28,7 @@ const NewListingPage = () => {
   };
 
   const handleSubmit = async (values: ListingData) => {
+    setProgress(0);
     setUploadVisible(true);
 
     const data = new FormData();
