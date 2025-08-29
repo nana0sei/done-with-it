@@ -54,17 +54,20 @@ const NewListingPage = () => {
       setProgress(progress)
     );
 
-    setUploadVisible(false);
-
     if (!res.ok) {
+      setUploadVisible(false);
       alert("Something went wrong");
       console.error(res.problem, res.data);
-    } else alert("Success");
+    } else setProgress(1);
   };
 
   return (
     <Screen style={styles.container}>
-      <UploadScreen progress={progress} visible={uploadVisible} />
+      <UploadScreen
+        progress={progress}
+        visible={uploadVisible}
+        onDone={() => setUploadVisible(false)}
+      />
       <AppForm
         defaultValues={defaultValues}
         validationSchema={validationSchema}
