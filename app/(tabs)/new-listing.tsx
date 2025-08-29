@@ -102,7 +102,7 @@ const NewListingPage = () => {
           placeholder="Description"
         />
 
-        <SubmitButton title="Post" onSubmit={handleSubmit} />
+        <SubmitButton title="Post" onSubmit={handleSubmit} resetOnSuccess />
       </AppForm>
     </Screen>
   );
