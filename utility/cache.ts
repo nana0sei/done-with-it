@@ -9,7 +9,7 @@ interface StoredItem {
   timestamp: number;
 }
 
-const store = async (key: string, value: string | object) => {
+const store = async (key: string, value: any) => {
   try {
     const item = { value, timestamp: Date.now() };
 
