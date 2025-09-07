@@ -16,12 +16,7 @@ const HomePage = () => {
 
   useRefreshOnFocus(refetch);
 
-  if (isLoading)
-    return (
-      <Screen style={styles.screen}>
-        <ActivityIndicator visible />
-      </Screen>
-    );
+  if (isLoading) return <ActivityIndicator visible />;
 
   if (error || !listings)
     return (
