@@ -14,8 +14,6 @@ const HomePage = () => {
   const { data: listings, isLoading, error, refetch } = useListings();
   const router = useRouter();
 
-  useRefreshOnFocus(refetch);
-
   if (isLoading)
     return (
       <Screen style={styles.screen}>
