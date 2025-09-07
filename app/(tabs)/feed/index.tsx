@@ -14,7 +14,7 @@ const HomePage = () => {
   const { data: listings, isLoading, error, refetch } = useListings();
   const router = useRouter();
 
-  // useRefreshOnFocus(refetch);
+  useRefreshOnFocus(refetch);
 
   if (isLoading)
     return (
