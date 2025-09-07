@@ -19,7 +19,7 @@ const HomePage = () => {
   if (isLoading)
     return (
       <Screen style={styles.screen}>
-        <ActivityIndicator visible={true} />
+        <ActivityIndicator visible />
       </Screen>
     );
 
@@ -27,7 +27,7 @@ const HomePage = () => {
     return (
       <Screen style={styles.screen}>
         <AppText> Couldn't retrieve the listings</AppText>
-        <AppButton title="Retry" onPress={refetch} />{" "}
+        <AppButton title="Retry" onPress={refetch} />
       </Screen>
     );
 
