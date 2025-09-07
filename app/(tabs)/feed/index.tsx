@@ -23,14 +23,16 @@ const HomePage = () => {
       </Screen>
     );
 
+  if (error || !listings)
+    return (
+      <Screen style={styles.screen}>
+        <AppText> Couldn't retrieve the listings</AppText>
+        <AppButton title="Retry" onPress={refetch} />{" "}
+      </Screen>
+    );
+
   return (
     <Screen style={styles.screen}>
-      {error && (
-        <>
-          <AppText> Couldn't retrieve the listings</AppText>
-          <AppButton title="Retry" onPress={refetch} />
-        </>
-      )}
       <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
