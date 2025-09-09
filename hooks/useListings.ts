@@ -8,7 +8,6 @@ const useListings = () => {
   return useQuery({
     queryKey: ["listings"],
     queryFn: () => api.get(),
-    staleTime: 1000 * 60 * 5,
   });
 };
 
