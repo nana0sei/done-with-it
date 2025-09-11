@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet } from "react-native";
 import AppForm from "../components/Forms/AppForm";
 import AppFormField from "../components/Forms/AppFormField";
@@ -6,17 +6,27 @@ import Screen from "../components/Screen";
 import SubmitButton from "../components/Forms/SubmitButton";
 import z from "zod";
 import { useRouter } from "expo-router";
+import auth from "@/api/auth";
+import ErrorAlert from "@/components/Forms/ErrorAlert";
 
 const LoginScreen = () => {
   const router = useRouter();
+  const [error, setError] = useState("");
   const initialValues: UserData = {
     email: "",
     password: "",
   };
 
-  const handleLogin = (values: UserData) => {
-    console.log("Form values:", values);
-    router.navigate("/(tabs)/feed");
+  const handleLogin = async ({ email, password }: UserData) => {
+    const result = await auth.login(email, password);
+
+    if (!result.ok) {
+      setError(result.problem);
+    } else {
+      setError("");
+      console.log("token", result.data);
+      router.navigate("/(tabs)/feed");
+    }
   };
 
   return (
@@ -26,6 +36,7 @@ const LoginScreen = () => {
         source={require("../assets/images/store.png")}
       />
 
+      <ErrorAlert error={error} />
       <AppForm
         defaultValues={initialValues}
         validationSchema={validationSchema}
