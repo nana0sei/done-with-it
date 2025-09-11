@@ -24,7 +24,6 @@ const LoginScreen = () => {
       setError(result.problem);
     } else {
       setError("");
-      console.log("token", result.data);
       router.navigate("/(tabs)/feed");
     }
   };
