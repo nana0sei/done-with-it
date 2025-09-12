@@ -1,9 +1,12 @@
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 import AppButton from "../components/AppButton";
-import { useRouter } from "expo-router";
+import { Redirect, useRouter } from "expo-router";
+import AuthContext from "@/auth/context";
+import { useContext } from "react";
 
 const WelcomeScreen = () => {
   const router = useRouter();
+
   return (
     <ImageBackground
       blurRadius={10}
