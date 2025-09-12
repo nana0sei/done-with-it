@@ -8,6 +8,7 @@ import z from "zod";
 import { useRouter } from "expo-router";
 import auth from "@/api/auth";
 import ErrorAlert from "@/components/Forms/ErrorAlert";
+import { jwtDecode } from "jwt-decode";
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -24,6 +25,8 @@ const LoginScreen = () => {
       setError(result.problem);
     } else {
       setError("");
+      const user = jwtDecode(result.data as string);
+      console.log(user);
       router.navigate("/(tabs)/feed");
     }
   };
