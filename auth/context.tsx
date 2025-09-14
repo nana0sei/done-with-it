@@ -1,6 +1,6 @@
 import React from "react";
 
-interface User {
+export interface User {
   userId: number;
   name: string;
   email: string;
@@ -9,7 +9,7 @@ interface User {
 
 interface AuthObject {
   user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<{}>>;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
 const AuthContext = React.createContext<AuthObject | null>(null);
