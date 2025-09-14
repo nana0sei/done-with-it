@@ -2,12 +2,12 @@ import { lightTheme } from "@/config/navigationTheme";
 import { ThemeProvider } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
-import { Redirect, Stack } from "expo-router";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import OfflineNotice from "@/components/OfflineNotice";
 import AuthContext from "@/auth/context";
-import { useContext, useState } from "react";
+import OfflineNotice from "@/components/OfflineNotice";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Redirect, Stack } from "expo-router";
+import { useState } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const queryClient = new QueryClient();
 

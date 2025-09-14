@@ -1,21 +1,24 @@
+import AuthContext from "@/auth/context";
 import Icon from "@/components/Icon";
 import ListItem from "@/components/ListItem";
 import ListItemSeparator from "@/components/ListItemSeparator";
 import Screen from "@/components/Screen";
 import colors from "@/config/colors";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useContext } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 const AccountPage = () => {
+  const authContext = useContext(AuthContext);
   const router = useRouter();
+
   return (
     <Screen style={styles.screen}>
       {/* profile details */}
       <View style={styles.container}>
         <ListItem
-          title="Nana Osei"
-          subtitle="nana@mail.com"
+          title={authContext?.user?.name || ""}
+          subtitle={authContext?.user?.email || ""}
           image={require("@/assets/images/mosh.jpg")}
         />
 

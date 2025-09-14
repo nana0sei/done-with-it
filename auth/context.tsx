@@ -1,10 +1,17 @@
 import React from "react";
 
-type User = {
-  user: object | null;
-  setUser: React.Dispatch<React.SetStateAction<{}>>;
-};
+interface User {
+  userId: number;
+  name: string;
+  email: string;
+  iat: number;
+}
 
-const AuthContext = React.createContext<User | null>(null);
+interface AuthObject {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<{}>>;
+}
+
+const AuthContext = React.createContext<AuthObject | null>(null);
 
 export default AuthContext;
