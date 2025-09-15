@@ -20,7 +20,17 @@ export default function RootLayout() {
         <GestureHandlerRootView style={{ flex: 1 }}>
           <ThemeProvider value={lightTheme}>
             <OfflineNotice />
-            <Stack screenOptions={{ headerShown: false }} />
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Protected guard={!!user}>
+                <Stack.Screen name="(tabs)" />
+              </Stack.Protected>
+
+              <Stack.Protected guard={!user}>
+                <Stack.Screen name="index" />
+                <Stack.Screen name="login" />
+                <Stack.Screen name="register" />
+              </Stack.Protected>
+            </Stack>
             <StatusBar style="auto" />
           </ThemeProvider>
         </GestureHandlerRootView>
