@@ -51,7 +51,7 @@ const AccountPage = () => {
       <ListItem
         title="Log Out"
         IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
-        onPress={() => authContext?.setUser(null)}
+        onPress={handleLogout}
       />
     </Screen>
   );
