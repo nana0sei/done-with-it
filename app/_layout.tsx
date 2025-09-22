@@ -10,22 +10,37 @@ import { useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import authStorage from "@/auth/storage";
 import { jwtDecode } from "jwt-decode";
+import * as SplashScreen from "expo-splash-screen";
 
 const queryClient = new QueryClient();
 
+SplashScreen.preventAutoHideAsync();
+
 export default function RootLayout() {
   const [user, setUser] = useState<User | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
   const restoreToken = async () => {
-    const token = await authStorage.getToken();
+    try {
+      const token = await authStorage.getToken();
 
-    if (!token) return;
-    setUser(jwtDecode(token));
+      if (!token) return;
+      else {
+        setUser(jwtDecode(token));
+      }
+    } catch (error) {
+      console.error("Failed to restore token", error);
+    } finally {
+      setIsReady(true);
+      await SplashScreen.hideAsync();
+    }
   };
 
   useEffect(() => {
     restoreToken();
   }, []);
+
+  if (!isReady) return null;
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
