@@ -1,4 +1,5 @@
 import AuthContext from "@/auth/context";
+import authStorage from "@/auth/storage";
 import Icon from "@/components/Icon";
 import ListItem from "@/components/ListItem";
 import ListItemSeparator from "@/components/ListItemSeparator";
@@ -11,6 +12,11 @@ import { FlatList, StyleSheet, View } from "react-native";
 const AccountPage = () => {
   const authContext = useContext(AuthContext);
   const router = useRouter();
+
+  const handleLogout = () => {
+    authContext?.setUser(null);
+    authStorage.removeToken();
+  };
 
   return (
     <Screen style={styles.screen}>

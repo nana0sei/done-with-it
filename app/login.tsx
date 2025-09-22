@@ -9,7 +9,8 @@ import { useRouter } from "expo-router";
 import auth from "@/api/auth";
 import ErrorAlert from "@/components/Forms/ErrorAlert";
 import { jwtDecode } from "jwt-decode";
-import AuthContext from "@/auth/context";
+import AuthContext, { User } from "@/auth/context";
+import authStorage from "@/auth/storage";
 
 const LoginScreen = () => {
   const authContext = useContext(AuthContext);
@@ -27,8 +28,9 @@ const LoginScreen = () => {
       setError(result.problem);
     } else {
       setError("");
-      const user = jwtDecode(result.data as string);
+      const user = jwtDecode(result.data as string) as User;
       authContext?.setUser(user);
+      authStorage.storeToken(result.data as string);
       router.navigate("/(tabs)/feed");
     }
   };
