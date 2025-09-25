@@ -3,14 +3,13 @@ import { ThemeProvider } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
 import AuthContext, { User } from "@/auth/context";
+import authStorage from "@/auth/storage";
 import OfflineNotice from "@/components/OfflineNotice";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import authStorage from "@/auth/storage";
-import { jwtDecode } from "jwt-decode";
-import * as SplashScreen from "expo-splash-screen";
 
 const queryClient = new QueryClient();
 
@@ -20,13 +19,13 @@ export default function RootLayout() {
   const [user, setUser] = useState<User | null>(null);
   const [isReady, setIsReady] = useState(false);
 
-  const restoreToken = async () => {
+  const restoreUser = async () => {
     try {
-      const token = await authStorage.getToken();
+      const user = await authStorage.getUser();
 
-      if (!token) return;
+      if (!user) return;
       else {
-        setUser(jwtDecode(token));
+        setUser(user as User);
       }
     } catch (error) {
       console.error("Failed to restore token", error);
@@ -37,7 +36,7 @@ export default function RootLayout() {
   };
 
   useEffect(() => {
-    restoreToken();
+    restoreUser();
   }, []);
 
   if (!isReady) return null;
