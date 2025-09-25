@@ -1,19 +1,17 @@
-import React, { useContext, useState } from "react";
+import authApi from "@/api/auth";
+import { useAuth } from "@/auth/useAuth";
+import ErrorAlert from "@/components/Forms/ErrorAlert";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
 import { Image, StyleSheet } from "react-native";
+import z from "zod";
 import AppForm from "../components/Forms/AppForm";
 import AppFormField from "../components/Forms/AppFormField";
-import Screen from "../components/Screen";
 import SubmitButton from "../components/Forms/SubmitButton";
-import z from "zod";
-import { useRouter } from "expo-router";
-import auth from "@/api/auth";
-import ErrorAlert from "@/components/Forms/ErrorAlert";
-import { jwtDecode } from "jwt-decode";
-import AuthContext, { User } from "@/auth/context";
-import authStorage from "@/auth/storage";
+import Screen from "../components/Screen";
 
 const LoginScreen = () => {
-  const authContext = useContext(AuthContext);
+  const { login } = useAuth();
   const router = useRouter();
   const [error, setError] = useState("");
   const initialValues: UserData = {
@@ -22,15 +20,13 @@ const LoginScreen = () => {
   };
 
   const handleLogin = async ({ email, password }: UserData) => {
-    const result = await auth.login(email, password);
+    const result = await authApi.login(email, password);
 
     if (!result.ok) {
       setError(result.problem);
     } else {
       setError("");
-      const user = jwtDecode(result.data as string) as User;
-      authContext?.setUser(user);
-      authStorage.storeToken(result.data as string);
+      login(result.data as string);
       router.navigate("/(tabs)/feed");
     }
   };
