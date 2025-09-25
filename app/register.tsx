@@ -9,11 +9,16 @@ import APIClient from "@/api/client";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/auth/useAuth";
 import ErrorAlert from "@/components/Forms/ErrorAlert";
+import authApi from "@/api/auth";
+import ActivityIndicator from "@/components/ActivityIndicator";
 
 const api = new APIClient<object>("/users");
 
 const RegisterScreen = () => {
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
+  const { login } = useAuth();
   const defaultValues = {
     name: "",
     email: "",
@@ -22,16 +27,24 @@ const RegisterScreen = () => {
 
   const handleSignUp = async (values: RegisterData) => {
     setError("");
+    setSubmitting(true);
     const result = await api.create(values);
 
     if (!result.ok) {
+      setSubmitting(false);
       const data = result.data as { error: string };
-      setError(data?.error);
+      setError(data?.error || "An unexpected error occurred");
     } else {
-      setError("");
-      console.log(result.data);
+      const user = result.data as { email: string; password: string };
+      const { data: token } = await authApi.login(user.email, user.password);
+
+      login(token as string);
+      router.push("/feed");
+      setSubmitting(false);
     }
   };
+
+  if (submitting) return <ActivityIndicator visible />;
 
   return (
     <Screen style={styles.container}>
