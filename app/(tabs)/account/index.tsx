@@ -1,30 +1,23 @@
-import AuthContext from "@/auth/context";
-import authStorage from "@/auth/storage";
+import { useAuth } from "@/auth/useAuth";
 import Icon from "@/components/Icon";
 import ListItem from "@/components/ListItem";
 import ListItemSeparator from "@/components/ListItemSeparator";
 import Screen from "@/components/Screen";
 import colors from "@/config/colors";
 import { useRouter } from "expo-router";
-import React, { useContext } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 const AccountPage = () => {
-  const authContext = useContext(AuthContext);
+  const { auth, logout } = useAuth();
   const router = useRouter();
-
-  const handleLogout = () => {
-    authContext?.setUser(null);
-    authStorage.removeToken();
-  };
 
   return (
     <Screen style={styles.screen}>
       {/* profile details */}
       <View style={styles.container}>
         <ListItem
-          title={authContext?.user?.name || ""}
-          subtitle={authContext?.user?.email || ""}
+          title={auth?.user?.name || ""}
+          subtitle={auth?.user?.email || ""}
           image={require("@/assets/images/mosh.jpg")}
         />
 
@@ -51,7 +44,7 @@ const AccountPage = () => {
       <ListItem
         title="Log Out"
         IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
-        onPress={handleLogout}
+        onPress={() => logout()}
       />
     </Screen>
   );
