@@ -1,4 +1,5 @@
 import { create } from "apisauce";
+import authStorage from "@/auth/storage";
 
 const apiInstance = create({
   baseURL: process.env.EXPO_PUBLIC_API_URL,
@@ -12,8 +13,18 @@ class APIClient<T> {
   }
 
   get = async (path: string = "") => {
+    const authToken = await authStorage.getToken();
+
     return apiInstance
-      .get<T>(`${this.endpoint}${path}`)
+      .get<T>(
+        `${this.endpoint}${path}`,
+        {},
+        {
+          headers: {
+            "x-auth-token": authToken,
+          },
+        }
+      )
       .then((res) => res.data);
   };
 
