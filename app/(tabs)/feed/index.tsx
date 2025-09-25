@@ -10,12 +10,12 @@ import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 
 const HomePage = () => {
-  const { data: listings, isLoading, error, refetch } = useListings();
+  const { data: listings, isLoading, isError, refetch } = useListings();
   const router = useRouter();
 
   if (isLoading) return <ActivityIndicator visible />;
 
-  if (error || !listings)
+  if (isError || !listings)
     return (
       <Screen style={styles.screen}>
         <AppText> Couldn't retrieve the listings</AppText>
