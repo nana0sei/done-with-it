@@ -20,6 +20,7 @@ const LoginScreen = () => {
   };
 
   const handleLogin = async ({ email, password }: UserData) => {
+    setError("");
     const result = await authApi.login(email, password);
 
     if (!result.ok) {

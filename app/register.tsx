@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import AppForm from "../components/Forms/AppForm";
 import AppFormField from "../components/Forms/AppFormField";
 import Screen from "../components/Screen";
 import SubmitButton from "../components/Forms/SubmitButton";
 import z from "zod";
+import APIClient from "@/api/client";
+import { useRouter } from "expo-router";
+import { useAuth } from "@/auth/useAuth";
+import ErrorAlert from "@/components/Forms/ErrorAlert";
+
+const api = new APIClient<object>("/users");
 
 const RegisterScreen = () => {
+  const [error, setError] = useState("");
   const defaultValues = {
     name: "",
     email: "",
     password: "",
   };
 
-  const handleSignUp = (values: RegisterData) => {
-    console.log("Form values:", values);
+  const handleSignUp = async (values: RegisterData) => {
+    setError("");
+    const result = await api.create(values);
+
+    if (!result.ok) {
+      const data = result.data as { error: string };
+      setError(data?.error);
+    } else {
+      setError("");
+      console.log(result.data);
+    }
   };
 
   return (
     <Screen style={styles.container}>
+      <ErrorAlert error={error} />
+
       <AppForm
         defaultValues={defaultValues}
         validationSchema={validationSchema}
